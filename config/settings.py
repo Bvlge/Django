@@ -9,8 +9,9 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+from datetime import timedelta
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,6 +22,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure--2oq!o6g2%8j4az+txrar=b!rulovc8ecec2*wzmfm_55c@7#f'
+JWT_SECRET = os.environ.get("JWT_SECRET", "123")
+GO_STATISTICS_URL = os.getenv("GO_STATISTICS_URL", "http://localhost:8080/statistics")
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -39,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'transactions',
     'users',
+    'drf_yasg',
+    'drf_spectacular',
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
@@ -62,9 +68,20 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": (
         "rest_framework.permissions.IsAuthenticated",
     ),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SIMPLE_JWT = {
+    'SIGNING_KEY': JWT_SECRET,
+    'ALGORITHM': 'HS256',
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=10),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    # Outras configurações conforme necessário
 }
 
 AUTH_USER_MODEL = "users.CustomUser"
+
+STATISTICS_SERVICE_URL = os.getenv("STATISTICS_SERVICE_URL", "http://localhost:8080")
 
 ROOT_URLCONF = 'config.urls'
 
