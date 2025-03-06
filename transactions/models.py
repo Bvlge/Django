@@ -2,18 +2,18 @@ from django.db import models
 from django.conf import settings
 
 CATEGORY_CHOICES = [
-    ("salary", "Salário"),
-    ("food", "Alimentação"),
-    ("rent", "Moradia"),
-    ("transport", "Transporte"),
-    ("other", "Outros"),
+    ("Salary", "Salário"),
+    ("Food", "Alimentação"),
+    ("Rent", "Moradia"),
+    ("Transport", "Transporte"),
+    ("Other", "Outros"),
 ]
 
 TYPE_CHOICES = [
-    ("income", "Receita"),
-    ("receita", "Receita"),
-    ("expense", "Despesa"),
-    ("despesa", "Despesa"),
+    ("Income", "Receita"),
+    ("Receita", "Receita"),
+    ("Loss", "Despesa"),
+    ("Despesa", "Despesa"),
 ]
 
 class Transaction(models.Model):
@@ -30,7 +30,7 @@ class Transaction(models.Model):
     class Meta:
         constraints = [
             models.CheckConstraint(
-                check=models.Q(type__in=["income", "receita", "expense", "despesa"]),
+                check=models.Q(type__in=["Income", "Receita", "Loss", "Despesa"]),
                 name="check_transaction_type"
             )
         ]
