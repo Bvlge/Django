@@ -6,14 +6,12 @@ Este é um projeto Django configurado com Pipenv para gerenciamento de dependên
 
 - Python 3
 - Django
-- Pipenv (gerenciamento de dependências)
 
 ## 📌 Requisitos
 
 Antes de começar, certifique-se de ter instalado:
 
 - [Python 3](https://www.python.org/downloads/)
-- [Pipenv](https://pipenv.pypa.io/en/latest/)
 
 ## 📦 Instalação
 
@@ -27,13 +25,11 @@ cd meu_projeto_django
 Crie o ambiente virtual e instale as dependências:
 
 ```sh
-pipenv install
+python -m venv
 ```
 
-Ative o ambiente virtual:
-
 ```sh
-pipenv shell
+pip install -r requirements.txt
 ```
 
 ## ⚙️ Configuração do Projeto
@@ -60,16 +56,6 @@ python manage.py runserver
 
 Acesse o projeto no navegador: [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
 
-## 📂 Estrutura do Projeto
-
-```sh
-meu_projeto_django/
-│── config/              # Configuração principal do projeto
-│── manage.py            # Gerenciador do Django
-│── Pipfile              # Gerenciamento de dependências com Pipenv
-│── Pipfile.lock         # Versões exatas das dependências
-│── README.md            # Documentação do projeto
-```
 
 ## 🔧 Comandos Úteis
 
